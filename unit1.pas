@@ -75,9 +75,9 @@ end;
 
 procedure TForm1.Button3Click(Sender: TObject);
 var
-  s:string;
+{  s:string;
   a:Array of string;
-  b:Array[0..1] of string;
+
   i:integer;
 begin
   b[0]:='-o '+Edit2.Text;
@@ -91,7 +91,79 @@ begin
   a := s.Split('^');
   Memo2.Lines.Clear;
   for i:=0 to length(a) do
-     Memo2.Lines.Add(a[i]);
+     if length(a[i]) > 0 then
+        Memo2.Lines.Add(a[i]);
+}
+  b:TStringList;
+  process: TProcess;
+  stream: TMemoryStream;
+  strings: TStringList;
+  n: Integer;
+  ErrMsg: PChar;
+const streamsize = 16384;
+begin
+  b := TStringList.Create;
+  b[0]:='-o '+Edit2.Text;
+  b[1]:=Edit1.Text;
+
+  process := TProcess.Create(nil);
+  stream  := TMemoryStream.Create;
+  strings := TStringList.Create;
+  stream.SetSize(streamsize);
+
+
+  try
+     process.Options:=[poUsePipes,poStderrToOutput];
+     process.Executable:='yt-dlp.exe';
+     process.Parameters:=b;
+     process.ShowWindow:=swoHide;
+     process.Execute;
+     while process.Running do
+        begin
+        n := process.Output.Read(stream.Memory^,streamsize);
+          if n > 0 then
+             begin
+             strings.LoadFromStream(stream);
+             Memo2.Lines.Add(strings.Text);
+             stream.Clear;
+             end
+          else
+             Sleep(200);
+          end;
+
+    except
+       on e: EProcess do
+         begin
+         {$IFDEF Windows}
+           //FormatMessage(FORMAT_MESSAGE_ALLOCATE_BUFFER or FORMAT_MESSAGE_FROM_SYSTEM,nil,GetLastError,MAKELANGID(LANG_NEUTRAL,SUBLANG_DEFAULT),@ErrMsg,0,nil);
+         {$ELSE}
+           ErrMsg:=@e.Message[1];
+         {$ENDIF}
+           WriteLn(ErrMsg);
+         exit;
+         end;
+       on e: Exception do
+         begin
+           MessageDlg('Error',e.Message,mtError,[mbOK],0);
+         exit;
+       end;
+    end;
+
+  b.Free;
+
+  repeat
+     n := process.Output.Read(stream.Memory^,streamsize);
+     if n > 0 then
+        begin
+        strings.LoadFromStream(stream);
+        Memo2.Lines.Add(strings.Text);
+        stream.Clear;
+        end;
+  until n<=0;
+
+  strings.Free;
+  stream.Free;
+  process.Free;
 end;
 
 procedure TForm1.FormClose(Sender: TObject);
