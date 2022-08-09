@@ -1,5 +1,5 @@
 # Lazarus2YTDL
-a minimalistic GUI to the yt-dl commandline tool.
+a minimalistic GUI to the yt-dlp commandline tool.
 
 
 Usage:
@@ -22,3 +22,6 @@ Installation:
 NOTE: the binaries from ffmpeg, ffplay, yt-dlp have their own
       copyrights. You may want to choose the very latest version
       you can find. yt-dlp has it own commandline update.
+
+      Latest yt-dlp release files:
+      https://github.com/yt-dlp/yt-dlp#release-files
