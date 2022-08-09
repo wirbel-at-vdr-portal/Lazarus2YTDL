@@ -1,87 +1,60 @@
 object Form1: TForm1
-  Left = 523
-  Height = 924
-  Top = 103
-  Width = 1285
-  Caption = 'Form1'
-  ClientHeight = 924
-  ClientWidth = 1285
+  Left = 651
+  Height = 627
+  Top = 189
+  Width = 777
+  Caption = 'Lazarus2YTDL'
+  ClientHeight = 627
+  ClientWidth = 777
   OnClose = FormClose
   OnCreate = FormCreate
   LCLVersion = '2.0.4.0'
-  object Memo1: TMemo
-    Left = 300
-    Height = 251
-    Top = 573
-    Width = 814
-    Lines.Strings = (
-      'Memo1'
-    )
-    TabOrder = 0
+  object Label1: TLabel
+    Left = 24
+    Height = 15
+    Top = 48
+    Width = 42
+    Caption = 'Address'
+    ParentColor = False
   end
-  object PageControl1: TPageControl
-    Left = 40
-    Height = 744
-    Top = 152
-    Width = 1200
-    ActivePage = TabSheet2
-    TabIndex = 1
+  object Label2: TLabel
+    Left = 24
+    Height = 15
+    Top = 80
+    Width = 33
+    Caption = 'Folder'
+    ParentColor = False
+  end
+  object Edit2: TEdit
+    Left = 76
+    Height = 23
+    Top = 72
+    Width = 692
+    TabOrder = 0
+    Text = '%(title)s/%(format)s%(resolution)s.%(ext)s'
+  end
+  object Edit1: TEdit
+    Left = 76
+    Height = 23
+    Top = 40
+    Width = 692
     TabOrder = 1
-    object TabSheet1: TTabSheet
-      Caption = 'TabSheet1'
-    end
-    object TabSheet2: TTabSheet
-      Caption = 'TabSheet2'
-      ClientHeight = 716
-      ClientWidth = 1192
-      object Edit1: TEdit
-        Left = 212
-        Height = 23
-        Top = 104
-        Width = 692
-        TabOrder = 0
-      end
-      object Label1: TLabel
-        Left = 160
-        Height = 15
-        Top = 112
-        Width = 42
-        Caption = 'Address'
-        ParentColor = False
-      end
-      object Button3: TButton
-        Left = 503
-        Height = 25
-        Top = 240
-        Width = 75
-        Caption = 'Download'
-        OnClick = Button3Click
-        TabOrder = 1
-      end
-      object Edit2: TEdit
-        Left = 212
-        Height = 23
-        Top = 136
-        Width = 692
-        TabOrder = 2
-        Text = '%(title)s/%(format)s%(resolution)s.%(ext)s'
-      end
-      object Label2: TLabel
-        Left = 160
-        Height = 15
-        Top = 144
-        Width = 33
-        Caption = 'Folder'
-        ParentColor = False
-      end
-      object Memo2: TMemo
-        Left = 223
-        Height = 266
-        Top = 380
-        Width = 689
-        ScrollBars = ssAutoBoth
-        TabOrder = 3
-      end
-    end
+  end
+  object Button3: TButton
+    Left = 80
+    Height = 25
+    Top = 120
+    Width = 75
+    Caption = 'Download'
+    OnClick = Button3Click
+    TabOrder = 2
+  end
+  object Memo2: TMemo
+    Left = 24
+    Height = 458
+    Top = 160
+    Width = 744
+    ScrollBars = ssAutoBoth
+    TabOrder = 3
   end
 end
