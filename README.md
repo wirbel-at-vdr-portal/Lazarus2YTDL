@@ -12,8 +12,7 @@ Usage:
        https://github.com/yt-dlp/yt-dlp#output-template
    You may define either relative paths to the install position
    of this tool, or, absolute paths. Your choice.
-   The last template used is restored after restart. Therefore,
-   write permission is required for the install dir.
+   The last template used is restored after restart.
 
 3. Start download using the Button. All messages from
    yt-dlp should appear in the Memo component.
