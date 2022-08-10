@@ -1,11 +1,11 @@
 object Form1: TForm1
   Left = 651
-  Height = 627
+  Height = 690
   Top = 189
-  Width = 777
+  Width = 776
   Caption = 'Lazarus2YTDL'
-  ClientHeight = 627
-  ClientWidth = 777
+  ClientHeight = 690
+  ClientWidth = 776
   OnClose = FormClose
   OnCreate = FormCreate
   LCLVersion = '2.0.4.0'
@@ -43,7 +43,7 @@ object Form1: TForm1
   object Button3: TButton
     Left = 80
     Height = 25
-    Top = 120
+    Top = 176
     Width = 75
     Caption = 'Download'
     OnClick = Button3Click
@@ -52,9 +52,26 @@ object Form1: TForm1
   object Memo2: TMemo
     Left = 24
     Height = 458
-    Top = 160
+    Top = 224
     Width = 744
     ScrollBars = ssAutoBoth
     TabOrder = 3
+  end
+  object Label3: TLabel
+    Left = 24
+    Height = 15
+    Top = 112
+    Width = 41
+    Caption = 'Format:'
+    ParentColor = False
+  end
+  object ComboBox1: TComboBox
+    Left = 76
+    Height = 23
+    Top = 104
+    Width = 692
+    ItemHeight = 15
+    TabOrder = 4
+    Text = 'default'
   end
 end

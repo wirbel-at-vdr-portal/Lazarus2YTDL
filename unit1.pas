@@ -10,12 +10,16 @@ uses
 
 type
 
+  { TForm1 }
+
   TForm1 = class(TForm)
     Button3: TButton;
+    ComboBox1: TComboBox;
     Edit1: TEdit;
     Edit2: TEdit;
     Label1: TLabel;
     Label2: TLabel;
+    Label3: TLabel;
     Memo2: TMemo;
     procedure Button3Click(Sender: TObject);
     procedure FormClose(Sender: TObject);
@@ -24,13 +28,32 @@ type
   public
   end;
 
+  TStringPair = record
+    arg:string;
+    comment:string;
+  end;
+
+const
+  YT_Formats: array[0..6] of TStringPair = (
+       (arg:' ';               comment:'default'),
+       (arg:'-f "bv+ba/b"';    comment:'merge best video, best audio'),
+       (arg:'-S "+res"';       comment:'best video with smallest resolution'),
+       (arg:'-S "+size,+br"';  comment:'smallest video available'),
+       (arg:'-S "height:480"'; comment:'best video no better than 480p'),
+       (arg:'-f ba';           comment:'best audio only'),
+       (arg:'-f "mp3/aac"';    comment:'best mp3 or aac audio')
+    );
+
 var
   Form1: TForm1;
   cmd: string;
   ini: Tinifile;
   AProcess: TProcess;
 
-const streamsize = 4194304;
+const
+  streamsize = 4194304;
+
+
 
 { forward declarations. }
 
@@ -38,6 +61,8 @@ const streamsize = 4194304;
 implementation
 
 {$R *.lfm}
+
+
 
 
 procedure TForm1.Button3Click(Sender: TObject);
@@ -53,12 +78,20 @@ begin
   buffer[0]:=#0; // silence compiler.
 
   try
+     ini.WriteString('File','Last',Edit1.Text);
      ini.WriteString('File','Template',Edit2.Text);
+     if ComboBox1.ItemIndex<>-1 then
+        begin
+        ini.WriteInteger('Format','Selection',ComboBox1.ItemIndex);
+        ini.WriteString('Format','Description',ComboBox1.Items[ComboBox1.ItemIndex]);
+        end;
      Memo2.Lines.Clear;
      Memo2.Lines.Add(Edit1.Text);
      AProcess.Parameters.Clear;
      AProcess.Parameters.Add('-o '+Edit2.Text);
      AProcess.Parameters.Add(Edit1.Text);
+     if ComboBox1.ItemIndex<>-1 then
+        AProcess.Parameters.Add(YT_Formats[ComboBox1.ItemIndex].arg);
      AProcess.Execute;
      while AProcess.Running do
         begin
@@ -92,6 +125,7 @@ procedure TForm1.FormCreate(Sender: TObject);
 var
   AppConfigDir:string;
   AppConfigFile:string;
+  i:integer;
 begin
   AProcess := TProcess.Create(nil);
   AProcess.Executable:='yt-dlp.exe';
@@ -109,7 +143,15 @@ begin
   AppConfigFile:=AppConfigDir + '\settings.ini';
   DoDirSeparators(AppConfigFile);
   ini:=Tinifile.Create(AppConfigFile);
+
+  Edit1.Text:=ini.ReadString('File','Last','');
   Edit2.Text:=ini.ReadString('File','Template','%(title)s/%(resolution)s.%(ext)s');
+
+  for i:=0 to length(YT_Formats)-1 do
+     ComboBox1.Items.Add(YT_Formats[i].comment);
+  ComboBox1.ItemIndex:=ini.ReadInteger('Format','Selection',0);
+  if ComboBox1.ItemIndex<>-1 then
+     ComboBox1.Text:=ComboBox1.Items[ComboBox1.ItemIndex];
 end;
 
 
