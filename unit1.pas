@@ -10,8 +10,6 @@ uses
 
 type
 
-  { TForm1 }
-
   TForm1 = class(TForm)
     Button3: TButton;
     Edit1: TEdit;
@@ -23,9 +21,7 @@ type
     procedure FormClose(Sender: TObject);
     procedure FormCreate(Sender: TObject);
   private
-
   public
-
   end;
 
 var
@@ -35,6 +31,9 @@ var
   AProcess: TProcess;
 
 const streamsize = 4194304;
+
+{ forward declarations. }
+
 
 implementation
 
@@ -54,6 +53,7 @@ begin
   buffer[0]:=#0; // silence compiler.
 
   try
+     ini.WriteString('File','Template',Edit2.Text);
      Memo2.Lines.Clear;
      Memo2.Lines.Add(Edit1.Text);
      AProcess.Parameters.Clear;
@@ -89,6 +89,9 @@ end;
 
 
 procedure TForm1.FormCreate(Sender: TObject);
+var
+  AppConfigDir:string;
+  AppConfigFile:string;
 begin
   AProcess := TProcess.Create(nil);
   AProcess.Executable:='yt-dlp.exe';
@@ -96,8 +99,17 @@ begin
   AProcess.PipeBufferSize:=streamsize;
   AProcess.Options:=[poUsePipes,poStderrToOutput];
 
-  ini:=Tinifile.Create('settings.ini');
-  Edit2.Text:=ini.ReadString('File','Template','%(title)s/s%(resolution)s.%(ext)s');
+  AppConfigDir:=GetAppConfigDir(false);
+  if not DirectoryExists(AppConfigDir) then
+     begin
+     if not CreateDir(AppConfigDir)  then
+        ShowMessage('Could not create ' + AppConfigDir);
+     end;
+
+  AppConfigFile:=AppConfigDir + '\settings.ini';
+  DoDirSeparators(AppConfigFile);
+  ini:=Tinifile.Create(AppConfigFile);
+  Edit2.Text:=ini.ReadString('File','Template','%(title)s/%(resolution)s.%(ext)s');
 end;
 
 
