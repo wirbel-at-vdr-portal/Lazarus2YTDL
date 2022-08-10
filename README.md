@@ -1,6 +1,7 @@
 # Lazarus2YTDL
 a minimalistic GUI to the yt-dlp commandline tool.
 
+![alt text](doc/Lazarus2YTDL.png)
 
 Usage:
 1. Paste a download address into the first Edit component.
