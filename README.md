@@ -14,6 +14,15 @@ Usage:
    of this tool, or, absolute paths. Your choice.
    The last template used is restored after restart.
 
+_Optional: Select an Output Format in the ComboBox above the Memo:_
+* default (nothing is selected, let yt-dlp choose)
+* merge best video, best audio
+* best video with smallest resolution
+* smallest video available
+* best video no better than 480p
+* best audio only
+* best mp3 or aac audio
+
 3. Start download using the Button. All messages from
    yt-dlp should appear in the Memo component.
 
