@@ -21,8 +21,8 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="Unit1"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="119"/>
-        <CursorPos X="37" Y="153"/>
+        <TopLine Value="101"/>
+        <CursorPos X="53" Y="148"/>
         <UsageCount Value="47"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -98,28 +98,25 @@
         <UsageCount Value="9"/>
       </Unit11>
       <Unit12>
-        <Filename Value="C:\Programme_2\lazarus\fpc\3.0.4\source\packages\fcl-process\src\process.pp"/>
-        <EditorIndex Value="4"/>
+        <Filename Value="..\..\..\..\lazarus\fpc\3.0.4\source\packages\fcl-process\src\process.pp"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="187"/>
         <CursorPos X="28" Y="140"/>
         <UsageCount Value="16"/>
-        <Loaded Value="True"/>
       </Unit12>
       <Unit13>
-        <Filename Value="C:\Programme_2\lazarus\lcl\include\application.inc"/>
-        <EditorIndex Value="3"/>
+        <Filename Value="..\..\..\..\lazarus\lcl\include\application.inc"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="355"/>
         <CursorPos Y="384"/>
         <UsageCount Value="14"/>
-        <Loaded Value="True"/>
       </Unit13>
       <Unit14>
-        <Filename Value="C:\Programme_2\lazarus\fpc\3.0.4\source\rtl\objpas\sysutils\sysstrh.inc"/>
-        <EditorIndex Value="2"/>
+        <Filename Value="..\..\..\..\lazarus\fpc\3.0.4\source\rtl\objpas\sysutils\sysstrh.inc"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="93"/>
         <CursorPos X="18" Y="113"/>
         <UsageCount Value="12"/>
-        <Loaded Value="True"/>
       </Unit14>
     </Units>
     <JumpHistory Count="30" HistoryIndex="29">
