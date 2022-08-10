@@ -40,3 +40,12 @@ NOTE: the binaries from ffmpeg, ffplay, yt-dlp have their own
 
       Latest yt-dlp release files:
       https://github.com/yt-dlp/yt-dlp#release-files
+
+
+Compiling Lazarus2YTDL:
+1. Install the Lazarus IDE, together with the fpc (at least Lazarus-2.0.6 + fpc-3.0.4)
+
+2. open Lazarus2YTDL.lpr from the Lazarus IDE and press F9.
+
+3. wasn't that easy ? Everything done, continue with Installation.
+
