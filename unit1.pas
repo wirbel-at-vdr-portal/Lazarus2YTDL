@@ -24,6 +24,7 @@ type
     procedure Button3Click(Sender: TObject);
     procedure FormClose(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure YtdlpUpdate;
   private
   public
   end;
@@ -126,6 +127,7 @@ var
   AppConfigDir:string;
   AppConfigFile:string;
   i:integer;
+  d,interval:TDateTime;
 begin
   AProcess := TProcess.Create(nil);
   AProcess.Executable:='yt-dlp.exe';
@@ -152,6 +154,20 @@ begin
   ComboBox1.ItemIndex:=ini.ReadInteger('Format','Selection',0);
   if ComboBox1.ItemIndex<>-1 then
      ComboBox1.Text:=ComboBox1.Items[ComboBox1.ItemIndex];
+
+  d:=ini.ReadDateTime('Update','yt-dlp',now);
+  interval:=ini.ReadFloat('Update','CheckInterval',0.0);
+  if interval < 1.0 then
+     begin
+     interval := 7.0;
+     ini.WriteFloat('Update','CheckInterval',interval);
+     end;
+  if (now-d) > interval then
+     begin
+     if MessageDlg('Last yp-dlp Update check older than one week. Should i check for an Update?',
+                   mtConfirmation, mbOkCancel , 0) = mrOk then YtdlpUpdate;
+     ini.WriteDateTime('Update','yt-dlp',now);
+     end;
 end;
 
 
@@ -160,6 +176,45 @@ begin
   AProcess.Free;
   ini.Free;
 end;
+
+procedure TForm1.YtdlpUpdate;
+var
+  strings:TStringList;
+  BytesAvailable:Cardinal;
+  i:integer;
+  buffer:array[0..4194303] of char;
+begin
+  strings:=TStringList.Create;
+  strings.StrictDelimiter:=true;
+  strings.Delimiter:=#13;
+  buffer[0]:=#0; // silence compiler.
+  Memo2.Lines.Add('Start yt-dlp update.');
+
+  try
+     AProcess.Parameters.Add('--update');
+     AProcess.Execute;
+     while AProcess.Running do
+        begin
+        Application.ProcessMessages;
+        BytesAvailable := AProcess.Output.NumBytesAvailable;
+        if BytesAvailable > 0 then
+           begin
+           AProcess.Output.Read(buffer, BytesAvailable);
+           strings.DelimitedText:=buffer;
+           for i:=0 to strings.Count-1 do
+              begin
+              if length(strings[i]) > 0 then
+                 Memo2.Lines.Add(strings[i]);
+              end;
+           end;
+        end;
+    except
+      on e : Exception do Memo2.Lines.Add(e.Message);
+    end;
+
+  strings.Free;
+end;
+
 
 
 end.
