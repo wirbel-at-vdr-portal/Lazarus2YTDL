@@ -3,7 +3,7 @@
 The settings file stores the settings of this tool on the local computer. The file format is human readable and editable in classic INI file format.
 
 It's path depends on the OS, ie.
-* C:\users\__YOUR_USER_NAME__\AppData\Local\Lazarus2YTDL\settings.ini
+* C:\users\\__YOUR_USER_NAME__\AppData\Local\Lazarus2YTDL\settings.ini
 * /home/__YOUR_USER_NAME__/.config/Lazarus2YTDL\settings.ini
 * (..)
 
