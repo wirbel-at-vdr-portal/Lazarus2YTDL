@@ -26,6 +26,16 @@ _Optional: Select an Output Format in the ComboBox above the Memo:_
 3. Start download using the Button. All messages from
    yt-dlp should appear in the Memo component.
 
+Hints:
+- You may also download a sequence of addresses.
+  To do so, use the 'Add to List' button to add them to the queue.
+  Once you have all addresses added, start the downloads using the
+  'Start List' button.
+
+- The yt-dlp tool may often require updates. This tool asks every
+  seven days, if you wish to update it. You can also use the
+  'update yt-dlp' Button to trigger an update. 
+
 
 
 Installation:
