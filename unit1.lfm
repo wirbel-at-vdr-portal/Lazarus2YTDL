@@ -1,10 +1,10 @@
 object Form1: TForm1
-  Left = 651
-  Height = 690
-  Top = 189
+  Left = 824
+  Height = 806
+  Top = 324
   Width = 776
   Caption = 'Lazarus2YTDL'
-  ClientHeight = 690
+  ClientHeight = 806
   ClientWidth = 776
   OnClose = FormClose
   OnCreate = FormCreate
@@ -12,7 +12,7 @@ object Form1: TForm1
   object Label1: TLabel
     Left = 24
     Height = 15
-    Top = 48
+    Top = 24
     Width = 42
     Caption = 'Address'
     ParentColor = False
@@ -20,7 +20,7 @@ object Form1: TForm1
   object Label2: TLabel
     Left = 24
     Height = 15
-    Top = 80
+    Top = 96
     Width = 33
     Caption = 'Folder'
     ParentColor = False
@@ -28,7 +28,7 @@ object Form1: TForm1
   object Edit2: TEdit
     Left = 76
     Height = 23
-    Top = 72
+    Top = 88
     Width = 692
     TabOrder = 0
     Text = '%(title)s/%(format)s%(resolution)s.%(ext)s'
@@ -36,23 +36,23 @@ object Form1: TForm1
   object Edit1: TEdit
     Left = 76
     Height = 23
-    Top = 40
+    Top = 16
     Width = 692
     TabOrder = 1
   end
   object Button3: TButton
     Left = 76
     Height = 25
-    Top = 152
+    Top = 48
     Width = 75
     Caption = 'Download'
     OnClick = Button3Click
     TabOrder = 2
   end
   object Memo2: TMemo
-    Left = 24
+    Left = 16
     Height = 458
-    Top = 224
+    Top = 344
     Width = 744
     ScrollBars = ssAutoBoth
     TabOrder = 3
@@ -60,7 +60,7 @@ object Form1: TForm1
   object Label3: TLabel
     Left = 24
     Height = 15
-    Top = 112
+    Top = 128
     Width = 41
     Caption = 'Format:'
     ParentColor = False
@@ -68,7 +68,7 @@ object Form1: TForm1
   object ComboBox1: TComboBox
     Left = 76
     Height = 23
-    Top = 104
+    Top = 120
     Width = 692
     ItemHeight = 15
     TabOrder = 4
@@ -77,10 +77,36 @@ object Form1: TForm1
   object Button1: TButton
     Left = 76
     Height = 25
-    Top = 186
+    Top = 152
     Width = 75
     Caption = 'Open Folder'
     OnClick = Button1Click
     TabOrder = 5
+  end
+  object Memo1: TMemo
+    Left = 16
+    Height = 120
+    Top = 216
+    Width = 744
+    ScrollBars = ssAutoBoth
+    TabOrder = 6
+  end
+  object Button2: TButton
+    Left = 160
+    Height = 25
+    Top = 48
+    Width = 80
+    Caption = 'Add to List'
+    OnClick = Button2Click
+    TabOrder = 7
+  end
+  object Button4: TButton
+    Left = 248
+    Height = 25
+    Top = 48
+    Width = 75
+    Caption = 'Start List'
+    OnClick = Button4Click
+    TabOrder = 8
   end
 end

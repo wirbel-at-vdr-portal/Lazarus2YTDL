@@ -14,19 +14,25 @@ type
 
   TForm1 = class(TForm)
     Button1: TButton;
+    Button2: TButton;
     Button3: TButton;
+    Button4: TButton;
     ComboBox1: TComboBox;
     Edit1: TEdit;
     Edit2: TEdit;
     Label1: TLabel;
     Label2: TLabel;
     Label3: TLabel;
+    Memo1: TMemo;
     Memo2: TMemo;
     procedure Button1Click(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
+    procedure Button4Click(Sender: TObject);
     procedure FormClose(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure YtdlpUpdate;
+    procedure Download(url:string);
   private
   public
   end;
@@ -69,19 +75,38 @@ uses Windows,ShellApi;
 
 
 procedure TForm1.Button3Click(Sender: TObject);
+begin
+  Download(Edit1.Text);
+end;
+
+procedure TForm1.Button4Click(Sender: TObject);
+var url:string;
+begin
+  while(Memo1.Lines.Count > 0) do
+     begin
+     url:=Memo1.Lines[0];
+     Memo1.Lines.Delete(0);
+     Download(url);
+     end;
+end;
+
+procedure TForm1.Download(url:string);
 var
   strings:TStringList;
   BytesAvailable:Cardinal;
   i:integer;
   buffer:array[0..4194303] of char;
 begin
+  if length(url) < 1 then
+     exit;
+
   strings:=TStringList.Create;
   strings.StrictDelimiter:=true;
   strings.Delimiter:=#13;
   buffer[0]:=#0; // silence compiler.
 
   try
-     ini.WriteString('File','Last',Edit1.Text);
+     ini.WriteString('File','Last',url);
      ini.WriteString('File','Template',Edit2.Text);
      if ComboBox1.ItemIndex<>-1 then
         begin
@@ -89,10 +114,10 @@ begin
         ini.WriteString('Format','Description',ComboBox1.Items[ComboBox1.ItemIndex]);
         end;
      Memo2.Lines.Clear;
-     Memo2.Lines.Add(Edit1.Text);
+     Memo2.Lines.Add(url);
      AProcess.Parameters.Clear;
      AProcess.Parameters.Add('-o '+Edit2.Text);
-     AProcess.Parameters.Add(Edit1.Text);
+     AProcess.Parameters.Add(url);
      if ComboBox1.ItemIndex<>-1 then
         AProcess.Parameters.Add(YT_Formats[ComboBox1.ItemIndex].arg);
      AProcess.Execute;
@@ -130,6 +155,10 @@ begin
   ShellExecute(0, pchar('open'), pchar(path), NIL, NIL, SW_SHOWDEFAULT);
 end;
 
+procedure TForm1.Button2Click(Sender: TObject);
+begin
+  Memo1.Lines.Add(Edit1.Text);
+end;
 
 procedure TForm1.FormCreate(Sender: TObject);
 var
