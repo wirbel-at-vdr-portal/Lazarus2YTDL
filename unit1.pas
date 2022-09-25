@@ -155,7 +155,7 @@ begin
   if ComboBox1.ItemIndex<>-1 then
      ComboBox1.Text:=ComboBox1.Items[ComboBox1.ItemIndex];
 
-  d:=ini.ReadDateTime('Update','yt-dlp',now);
+  d:=ini.ReadDateTime('Update','yt-dlp',now-365);
   interval:=ini.ReadFloat('Update','CheckInterval',0.0);
   if interval < 1.0 then
      begin
