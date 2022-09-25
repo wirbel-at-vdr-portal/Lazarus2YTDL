@@ -13,6 +13,7 @@ type
   { TForm1 }
 
   TForm1 = class(TForm)
+    Button1: TButton;
     Button3: TButton;
     ComboBox1: TComboBox;
     Edit1: TEdit;
@@ -21,6 +22,7 @@ type
     Label2: TLabel;
     Label3: TLabel;
     Memo2: TMemo;
+    procedure Button1Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
     procedure FormClose(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -63,7 +65,7 @@ implementation
 
 {$R *.lfm}
 
-
+uses Windows,ShellApi;
 
 
 procedure TForm1.Button3Click(Sender: TObject);
@@ -119,6 +121,13 @@ begin
      Memo2.Lines.Add('yt-dlp.exe exited with status ' + IntToHex(AProcess.ExitStatus,8))
   else
      Memo2.Lines.Add('yt-dlp.exe exited sucessfully.');
+end;
+
+procedure TForm1.Button1Click(Sender: TObject);
+var path:string;
+begin
+  path := ExtractFilePath(Paramstr(0));
+  ShellExecute(0, pchar('open'), pchar(path), NIL, NIL, SW_SHOWDEFAULT);
 end;
 
 
