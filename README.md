@@ -5,6 +5,8 @@ a minimalistic GUI to the yt-dlp commandline tool.
 
 Usage:
 1. Paste a download address into the first Edit component.
+   If you are using a version from 12 Nov 2022 or newer,
+   you may use the _ClipBoard_ button to paste directly into this field.
 
 2. Define a template for the filename in the second Edit
    component. If you have never done so, you should read
