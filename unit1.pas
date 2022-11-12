@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, ComCtrls,
-  process, inifiles;
+  process, inifiles, Clipbrd;
 
 type
 
@@ -18,6 +18,7 @@ type
     Button3: TButton;
     Button4: TButton;
     Button5: TButton;
+    Button6: TButton;
     ComboBox1: TComboBox;
     Edit1: TEdit;
     Edit2: TEdit;
@@ -31,6 +32,7 @@ type
     procedure Button3Click(Sender: TObject);
     procedure Button4Click(Sender: TObject);
     procedure Button5Click(Sender: TObject);
+    procedure Button6Click(Sender: TObject);
     procedure FormClose(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure YtdlpUpdate;
@@ -95,6 +97,12 @@ end;
 procedure TForm1.Button5Click(Sender: TObject);
 begin
   YtdlpUpdate;
+end;
+
+procedure TForm1.Button6Click(Sender: TObject);
+begin
+  Edit1.Clear;
+  Edit1.PasteFromClipboard;
 end;
 
 procedure TForm1.Download(url:string);
